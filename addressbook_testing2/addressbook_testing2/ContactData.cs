@@ -6,14 +6,29 @@ using System.Threading.Tasks;
 
 namespace addressbook_testing2
 {
-        public class ContactName
-        {
+     public class ContactData
+     {
             private string first_name;
             private string middle_name = "";
             private string last_name = "";
             private string nick_name = "";
+            private string contact_title;
+            private string contact_company = "";
+            private string address;
+            private string homephone;
+            private string mobilephone = "";
+            private string workphone = "";
+            private string faxphone = "";
+            private string contact_hpage;
+            private string contact_email;
+            private string contact_email2 = "";
+            private string contact_email3 = "";
+            private string contact_address2;
+            private string contact_phone2 = "";
+            private string contact_notes = "";
+ 
 
-            public ContactName(string first_name)
+            public ContactData(string first_name)
             {
             this.first_name = first_name;
             }
@@ -65,18 +80,7 @@ namespace addressbook_testing2
                     nick_name = value;
                 }
             }
-        }
-
-        public class ContactWork
-        {
-            private string contact_title;
-            private string contact_company = "";
-
-            public ContactWork(string contact_title)
-            {
-            this.contact_title = contact_title;
-            }
-   
+        
             public string Contact_title
             {
                 get
@@ -100,17 +104,7 @@ namespace addressbook_testing2
                     contact_company = value;
                 }
             }
-        }
-
-        public class ContactAddress
-        {
-            private string address;
-
-            public ContactAddress(string address)
-            {
-            this.address = address;
-            }
-
+        
             public string Address
             {
                 get
@@ -121,21 +115,8 @@ namespace addressbook_testing2
                 {
                     address = value;
                 }
-            }
-        }
-
-        public class ContactPhone
-        {
-            private string homephone;
-            private string mobilephone = "";
-            private string workphone = "";
-            private string faxphone = "";
-
-            public ContactPhone(string homephone)
-            {
-            this.homephone = homephone;
-            }
-
+            }  
+        
             public string Homephone
             {
                 get
@@ -184,16 +165,6 @@ namespace addressbook_testing2
                 }
             }
 
-        }
-        public class ContactHomepage
-        {
-            private string contact_hpage;
-
-            public ContactHomepage(string contact_hpage)
-            {
-            this.contact_hpage = contact_hpage;
-            }
-
             public string Contact_hpage
             {
                 get
@@ -205,20 +176,7 @@ namespace addressbook_testing2
                     contact_hpage = value;
                 }
             }
-        }
-        public class ContactEmail
-        {
-            private string contact_email;
-            private string contact_email2 = "";
-            private string contact_email3 = "";
-
-            public ContactEmail(string contact_email)
-            {
-            this.contact_email = contact_email;
-            }
-
-
-
+        
             public string Contact_email
             {
                 get
@@ -235,11 +193,11 @@ namespace addressbook_testing2
             {
                 get
                 {
-                    return contact_email;
+                    return contact_email2;
                 }
                 set
                 {
-                    contact_email = value;
+                    contact_email2 = value;
                 }
             }
 
@@ -247,24 +205,12 @@ namespace addressbook_testing2
             {
                 get
                 {
-                    return contact_email;
+                    return contact_email3;
                 }
                 set
                 {
-                    contact_email = value;
+                    contact_email3 = value;
                 }
-            }
-
-        }
-        public class ContactSecondary
-        {
-            private string contact_address2;
-            private string contact_phone2 = "";
-            private string contact_notes = "";
-
-            public ContactSecondary(string contact_address2)
-            {
-            this.contact_address2 = contact_address2;
             }
 
             public string Contact_address2
@@ -302,8 +248,6 @@ namespace addressbook_testing2
             }
 
 
-        }
+     }
 
-
-    }
-//}
+}

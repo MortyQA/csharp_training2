@@ -60,7 +60,7 @@ namespace addressbook_testing2
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
             GoToAddNew();
-            ContactName cname = new ContactName("First name");
+            ContactData cname = new ContactData("First name");
             cname.Middle_name = "Middle name";
             cname.Last_name = "Last name";
             cname.Nick_name = "Nick name";
@@ -74,7 +74,7 @@ namespace addressbook_testing2
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
         }
 
-        private void ContactSecondary(ContactSecondary secondary)
+        private void ContactSecondary(ContactData secondary)
         {
             driver.FindElement(By.Name("address2")).Click();
             driver.FindElement(By.Name("address2")).Clear();
@@ -115,14 +115,14 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("ayear")).SendKeys("2020");
         }
 
-        private void ContactHomePage(ContactHomepage chpage)
+        private void ContactHomePage(ContactData chpage)
         {
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(chpage.Contact_hpage);
         }
 
-        private void ContactEmailInformation(ContactEmail cemail)
+        private void ContactEmailInformation(ContactData cemail)
         {
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).Clear();
@@ -135,7 +135,7 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("email3")).SendKeys(cemail.Contact_email3);
         }
 
-        private void ContactPhoneInformation(ContactPhone cphone)
+        private void ContactPhoneInformation(ContactData cphone)
         {
             driver.FindElement(By.Name("home")).Click();
             driver.FindElement(By.Name("home")).Clear();
@@ -151,14 +151,14 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("fax")).SendKeys(cphone.Faxphone);
         }
 
-        private void ContactAddress(ContactAddress caddress)
+        private void ContactAddress(ContactData caddress)
         {
             driver.FindElement(By.Name("address")).Click();
             driver.FindElement(By.Name("address")).Clear();
             driver.FindElement(By.Name("address")).SendKeys(caddress.Address);
         }
 
-        private void ContactWorkInformation(ContactWork cwork)
+        private void ContactWorkInformation(ContactData cwork)
         {
             driver.FindElement(By.Name("title")).Click();
             driver.FindElement(By.Name("title")).Clear();
@@ -168,7 +168,7 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("company")).SendKeys(cwork.Contact_company);
         }
 
-        private void ContactNameInformation(ContactName contact_name)
+        private void ContactNameInformation(ContactData contact_name)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
