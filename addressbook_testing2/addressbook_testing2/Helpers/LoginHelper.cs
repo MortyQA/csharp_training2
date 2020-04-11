@@ -10,13 +10,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_testing2
 {
-    public class LoginHelper
+    public class LoginHelper : HelperBase
     {
-        private IWebDriver driver;
-
-        public LoginHelper(IWebDriver driver)
+        public LoginHelper(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
         }
 
         public void Login(AccountData account)

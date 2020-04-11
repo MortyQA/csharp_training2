@@ -10,14 +10,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_testing2
 {
-    public class NavigationHelper
+    public class NavigationHelper : HelperBase
     {
-        private IWebDriver driver;
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
+        public NavigationHelper(IWebDriver driver, string baseURL) : base(driver)
         {
-            this.driver = driver;
             this.baseURL = baseURL;
         }
 
@@ -31,5 +29,14 @@ namespace addressbook_testing2
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
+        public void GoToAddNew()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
+
+        public void LogOut()
+        {
+            driver.FindElement(By.LinkText("Logout")).Click();
+        }
     }
 }

@@ -10,89 +10,13 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_testing2
 {
-    public class TestBase
-    {  
-        protected IWebDriver driver;
-        private StringBuilder verificationErrors;
-        protected string baseURL;
-
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigator;
-
-        [SetUp]
-        public void SetupTest()
+    public class ContactHelper : HelperBase
+    {
+        public ContactHelper(IWebDriver driver) : base(driver)
         {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost";
-            verificationErrors = new StringBuilder();
-
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(navigator);
         }
 
-        [TearDown]
-        public void TeardownTest()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
-
-        protected void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
-        }
-
-        protected void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
-
-        protected void InitNewGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        protected void FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
-        }
-
-        protected void SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-        protected void ReturnToGroupPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
-
-        protected void LogOut()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
-
-        protected void GoToAddNew()
-        {
-            driver.FindElement(By.LinkText("add new")).Click();
-        }
-
-        protected void ContactNameInformation(ContactData contact_name)
+        public void ContactNameInformation(ContactData contact_name)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -108,7 +32,7 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("nickname")).SendKeys(contact_name.Nick_name);
         }
 
-        protected void ContactWorkInformation(ContactData cwork)
+        public void ContactWorkInformation(ContactData cwork)
         {
             driver.FindElement(By.Name("title")).Click();
             driver.FindElement(By.Name("title")).Clear();
@@ -118,14 +42,14 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("company")).SendKeys(cwork.Contact_company);
         }
 
-        protected void ContactAddress(ContactData caddress)
+        public void ContactAddress(ContactData caddress)
         {
             driver.FindElement(By.Name("address")).Click();
             driver.FindElement(By.Name("address")).Clear();
             driver.FindElement(By.Name("address")).SendKeys(caddress.Address);
         }
 
-        protected void ContactPhoneInformation(ContactData cphone)
+        public void ContactPhoneInformation(ContactData cphone)
         {
             driver.FindElement(By.Name("home")).Click();
             driver.FindElement(By.Name("home")).Clear();
@@ -141,7 +65,7 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("fax")).SendKeys(cphone.Faxphone);
         }
 
-        protected void ContactEmailInformation(ContactData cemail)
+        public void ContactEmailInformation(ContactData cemail)
         {
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).Clear();
@@ -154,14 +78,14 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("email3")).SendKeys(cemail.Contact_email3);
         }
 
-        protected void ContactHomePage(ContactData chpage)
+        public void ContactHomePage(ContactData chpage)
         {
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(chpage.Contact_hpage);
         }
 
-        protected void ContactBirthday()
+        public void ContactBirthday()
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("1");
@@ -183,13 +107,13 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("ayear")).SendKeys("2020");
         }
 
-        protected void SelectContactGroup()
+        public void SelectContactGroup()
         {
             driver.FindElement(By.Name("new_group")).Click();
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText("aaa");
         }
 
-        protected void ContactSecondary(ContactData secondary)
+        public void ContactSecondary(ContactData secondary)
         {
             driver.FindElement(By.Name("address2")).Click();
             driver.FindElement(By.Name("address2")).Clear();
@@ -202,24 +126,11 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("notes")).SendKeys(secondary.Contact_notes);
         }
 
-        protected void AddContact()
+        public void AddContact()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
         }
 
-        protected void SelectGroup(int index)
-        {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-        }
 
-        protected void RemoveGroup()
-        {
-            driver.FindElement(By.Name("delete")).Click();
-        }
-
-        protected void ReturnToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
     }
 }

@@ -12,16 +12,16 @@ namespace addressbook_testing2
         [Test]
         public void NewContactTest()
         {
-            OpenHomePage();
-            loginHelper.Login(new AccountData("admin", "secret"));
-            GoToAddNew();
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Navigator.GoToAddNew();
             ContactData cname = new ContactData("First name");
             cname.Middle_name = "Middle name";
             cname.Last_name = "Last name";
             cname.Nick_name = "Nick name";
-            ContactNameInformation(cname);
-            AddContact();
-            LogOut();
+            app.Contacts.ContactNameInformation(cname);
+            app.Contacts.AddContact();
+            app.Navigator.LogOut();
         }
     }
 }
