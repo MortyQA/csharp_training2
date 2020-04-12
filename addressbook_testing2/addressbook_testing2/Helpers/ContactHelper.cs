@@ -12,11 +12,19 @@ namespace addressbook_testing2
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver) : base(driver)
+        public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
 
-        public void ContactNameInformation(ContactData contact_name)
+        public ContactHelper AddNewContactName(ContactData cname)
+        {
+            manager.Navigator.GoToAddNew();
+            ContactNameInformation(cname);
+            AddContact();
+            return this;
+        }
+
+        public ContactHelper ContactNameInformation(ContactData contact_name)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -30,9 +38,10 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("nickname")).Click();
             driver.FindElement(By.Name("nickname")).Clear();
             driver.FindElement(By.Name("nickname")).SendKeys(contact_name.Nick_name);
+            return this;
         }
 
-        public void ContactWorkInformation(ContactData cwork)
+        public ContactHelper ContactWorkInformation(ContactData cwork)
         {
             driver.FindElement(By.Name("title")).Click();
             driver.FindElement(By.Name("title")).Clear();
@@ -40,16 +49,18 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("company")).Click();
             driver.FindElement(By.Name("company")).Clear();
             driver.FindElement(By.Name("company")).SendKeys(cwork.Contact_company);
+            return this;
         }
 
-        public void ContactAddress(ContactData caddress)
+        public ContactHelper ContactAddress(ContactData caddress)
         {
             driver.FindElement(By.Name("address")).Click();
             driver.FindElement(By.Name("address")).Clear();
             driver.FindElement(By.Name("address")).SendKeys(caddress.Address);
+            return this;
         }
 
-        public void ContactPhoneInformation(ContactData cphone)
+        public ContactHelper ContactPhoneInformation(ContactData cphone)
         {
             driver.FindElement(By.Name("home")).Click();
             driver.FindElement(By.Name("home")).Clear();
@@ -63,9 +74,10 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("fax")).Click();
             driver.FindElement(By.Name("fax")).Clear();
             driver.FindElement(By.Name("fax")).SendKeys(cphone.Faxphone);
+            return this;
         }
 
-        public void ContactEmailInformation(ContactData cemail)
+        public ContactHelper ContactEmailInformation(ContactData cemail)
         {
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).Clear();
@@ -76,16 +88,18 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("email3")).Click();
             driver.FindElement(By.Name("email3")).Clear();
             driver.FindElement(By.Name("email3")).SendKeys(cemail.Contact_email3);
+            return this;
         }
 
-        public void ContactHomePage(ContactData chpage)
+        public ContactHelper ContactHomePage(ContactData chpage)
         {
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(chpage.Contact_hpage);
+            return this;
         }
 
-        public void ContactBirthday()
+        public ContactHelper ContactBirthday()
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("1");
@@ -105,15 +119,17 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys("2020");
+            return this;
         }
 
-        public void SelectContactGroup()
+        public ContactHelper SelectContactGroup()
         {
             driver.FindElement(By.Name("new_group")).Click();
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText("aaa");
+            return this;
         }
 
-        public void ContactSecondary(ContactData secondary)
+        public ContactHelper ContactSecondary(ContactData secondary)
         {
             driver.FindElement(By.Name("address2")).Click();
             driver.FindElement(By.Name("address2")).Clear();
@@ -124,11 +140,13 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(secondary.Contact_notes);
+            return this;
         }
 
-        public void AddContact()
+        public ContactHelper AddContact()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            return this;
         }
 
 
