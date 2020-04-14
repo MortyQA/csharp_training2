@@ -15,6 +15,7 @@ namespace addressbook_testing2
         protected IWebDriver driver;
         private StringBuilder verificationErrors;
         protected string baseURL;
+        protected bool acceptNextAlert;
 
         protected LoginHelper loginHelper;
         protected NavigationHelper navigator;
@@ -26,6 +27,7 @@ namespace addressbook_testing2
             driver = new FirefoxDriver();
             baseURL = "http://localhost";
             verificationErrors = new StringBuilder();
+            acceptNextAlert = true;
 
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
@@ -54,6 +56,55 @@ namespace addressbook_testing2
             Assert.AreEqual("", verificationErrors.ToString());
 
         }
+
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public bool IsAlertPresent()
+        {
+            try
+            {
+                driver.SwitchTo().Alert();
+                return true;
+            }
+            catch (NoAlertPresentException)
+            {
+                return false;
+            }
+        }
+
+        public string CloseAlertAndGetItsText()
+        {
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                string alertText = alert.Text;
+                if (acceptNextAlert)
+                {
+                    alert.Accept();
+                }
+                else
+                {
+                    alert.Dismiss();
+                }
+                return alertText;
+            }
+            finally
+            {
+                acceptNextAlert = true;
+            }
+        }
+
 
         public LoginHelper Auth
         {

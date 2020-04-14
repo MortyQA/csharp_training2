@@ -7,12 +7,12 @@ using NUnit.Framework;
 namespace addressbook_testing2
 {
     [TestFixture]
-    public class GroupRemovalTests : TestBase
+    public class RemoveContactTests : TestBase
     {
         [Test]
-        public void GroupRemovalTest()
+        public void RemoveContactTest()
         {
-            app.Groups.Remove(1);
+            app.Contacts.Remove(1);
         }
     }
 }

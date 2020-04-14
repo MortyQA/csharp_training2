@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -21,6 +22,26 @@ namespace addressbook_testing2
             manager.Navigator.GoToAddNew();
             ContactNameInformation(cname);
             AddContact();
+            return this;
+        }
+
+        public ContactHelper Modify(int p, ContactData newName)
+        {
+            manager.Navigator.GoToHome();
+            SelectContact(p);
+            ContactModification();
+            ContactNameInformation(newName);
+            SubmitContactModification();
+            ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Remove(int p)
+        {
+            manager.Navigator.GoToHome();
+            SelectContact(p);
+            RemoveContact();
+            AcceptRemove();
             return this;
         }
 
@@ -149,6 +170,53 @@ namespace addressbook_testing2
             return this;
         }
 
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
 
+        public ContactHelper AcceptRemove()
+        {
+            Assert.IsTrue(Regex.IsMatch(manager.CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
+            return this;
+        }
+
+        public ContactHelper SelectContact(int ID)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + ID + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+
+            return this;
+        }
+
+        public ContactHelper ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+            return this;
+        }
+
+        public ContactHelper ContactModification()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+
+        public ContactHelper ContactDetails()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
+            return this;
+        }
+
+        public ContactHelper AddTo()
+        {
+            driver.FindElement(By.Name("add")).Click();
+            return this;
+        }
     }
 }

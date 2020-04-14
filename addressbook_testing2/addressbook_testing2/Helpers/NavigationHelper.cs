@@ -34,6 +34,12 @@ namespace addressbook_testing2
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
+        public void GoToHome()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+        }
+
+
         public void LogOut()
         {
             driver.FindElement(By.LinkText("Logout")).Click();

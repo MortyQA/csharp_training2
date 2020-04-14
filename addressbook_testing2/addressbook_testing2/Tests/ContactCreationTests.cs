@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace addressbook_testing2
 {
     [TestFixture]
-    class NewContactTests : TestBase
+    class ContactCreationTests : TestBase
     {
         [Test]
         public void NewContactTest()
