@@ -25,10 +25,9 @@ namespace addressbook_testing2
             return this;
         }
 
-        public ContactHelper Modify(int p, ContactData newName)
+        public ContactHelper Modify(ContactData newName)
         {
             manager.Navigator.GoToHome();
-            SelectContact(p);
             ContactModification();
             ContactNameInformation(newName);
             SubmitContactModification();

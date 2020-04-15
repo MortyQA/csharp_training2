@@ -19,7 +19,7 @@ namespace addressbook_testing2
             newName.Last_name = "zzzz";
             newName.Nick_name = "vvvv";
 
-            app.Contacts.Modify(1, newName);
+            app.Contacts.Modify(newName);
         }
 
     }
