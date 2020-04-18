@@ -9,7 +9,7 @@ namespace addressbook_testing2
 {
     [TestFixture]
 
-    public  class GroupModificationTests : TestBase
+    public  class GroupModificationTests : AuthTestBases
     {
         [Test]
         public void GroupModificationTest()

@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace addressbook_testing2
 {
     [TestFixture]
-    class GroupCreationTests : TestBase
+    class GroupCreationTests : AuthTestBases
     {
         [Test]
         public void GroupCreationTest()
@@ -18,7 +18,6 @@ namespace addressbook_testing2
 
 
             app.Groups.Create(group);
-            app.Navigator.LogOut();
         }
 
         [Test]
@@ -30,7 +29,6 @@ namespace addressbook_testing2
 
      
             app.Groups.Create(group);
-            app.Navigator.LogOut();
         }
 
     }

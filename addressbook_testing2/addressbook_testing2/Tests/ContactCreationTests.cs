@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace addressbook_testing2
 {
     [TestFixture]
-    class ContactCreationTests : TestBase
+    class ContactCreationTests : AuthTestBases
     {
         [Test]
         public void NewContactTest()
@@ -18,7 +18,6 @@ namespace addressbook_testing2
             cname.Nick_name = "Nick name";
 
             app.Contacts.AddNewContactName(cname);
-            app.Navigator.LogOut();
         }
     }
 }
