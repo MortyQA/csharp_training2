@@ -28,6 +28,14 @@ namespace addressbook_testing2
         public ContactHelper Modify(ContactData newName)
         {
             manager.Navigator.GoToHome();
+
+            if (! FindContact())
+            {
+                manager.Navigator.GoToAddNew();
+                AddContact();
+                manager.Navigator.GoToHome();
+            }
+
             ContactModification();
             ContactNameInformation(newName);
             SubmitContactModification();
@@ -38,13 +46,25 @@ namespace addressbook_testing2
         public ContactHelper Remove(int p)
         {
             manager.Navigator.GoToHome();
-            SelectContact(p);
-            RemoveContact();
-            AcceptRemove();
-            return this;
+
+            if (! FindContact())
+            {
+                manager.Navigator.GoToAddNew();
+                AddContact();
+                manager.Navigator.GoToHome();
+            }
+                SelectContact(p);
+                RemoveContact();
+                AcceptRemove();
+                return this;
         }
 
-        public ContactHelper ContactNameInformation(ContactData contact_name)
+        public bool FindContact()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+
+    public ContactHelper ContactNameInformation(ContactData contact_name)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
