@@ -29,15 +29,6 @@ namespace addressbook_testing2
         public GroupHelper Modify(int p, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (!FindGroup())
-            {
-                manager.Navigator.GoToGroupsPage();
-                InitNewGroupCreation();
-                SubmitGroupCreation();
-                ReturnToGroupPage();
-            }
-
             SelectGroup(p);
             InitGroupModification();
             FillGroupForm(newData);
@@ -49,7 +40,14 @@ namespace addressbook_testing2
         public GroupHelper Remove(int p)
         {
             manager.Navigator.GoToGroupsPage();
+            SelectGroup(p);
+            RemoveGroup();
+            ReturnToGroupsPage();
+            return this;
+        }
 
+        public GroupHelper GroupExists()
+        {
             if (!FindGroup())
             {
                 manager.Navigator.GoToGroupsPage();
@@ -57,10 +55,6 @@ namespace addressbook_testing2
                 SubmitGroupCreation();
                 ReturnToGroupPage();
             }
-
-            SelectGroup(p);
-            RemoveGroup();
-            ReturnToGroupsPage();
             return this;
         }
 

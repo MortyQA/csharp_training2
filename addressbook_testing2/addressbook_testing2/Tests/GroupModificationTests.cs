@@ -18,6 +18,7 @@ namespace addressbook_testing2
             newData.Header = "qqq";
             newData.Footer = "www";
 
+            app.Groups.GroupExists();
             app.Groups.Modify(1, newData);
         }
 

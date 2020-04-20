@@ -12,6 +12,7 @@ namespace addressbook_testing2
         [Test]
         public void GroupRemovalTest()
         {
+            app.Groups.GroupExists();
             app.Groups.Remove(1);
         }
     }

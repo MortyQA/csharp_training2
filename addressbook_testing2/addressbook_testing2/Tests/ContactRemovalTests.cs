@@ -12,6 +12,7 @@ namespace addressbook_testing2
         [Test]
         public void RemoveContactTest()
         {
+            app.Contacts.ContactExists();
             app.Contacts.Remove(1);
         }
     }
