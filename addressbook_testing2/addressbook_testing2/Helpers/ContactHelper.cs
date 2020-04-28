@@ -235,5 +235,17 @@ namespace addressbook_testing2
             driver.FindElement(By.Name("add")).Click();
             return this;
         }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> centers = new List<ContactData>();
+            manager.Navigator.GoToHome();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td.center"));
+            foreach (IWebElement element in elements)
+            {
+                centers.Add(new ContactData(element.Text));
+            }
+            return centers;
+        }
     }
 }
