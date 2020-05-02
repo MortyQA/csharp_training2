@@ -240,10 +240,10 @@ namespace addressbook_testing2
         {
             List<ContactData> centers = new List<ContactData>();
             manager.Navigator.GoToHome();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td.center"));
+            ICollection<IWebElement> elements = driver.FindElements(By.TagName("td"));
             foreach (IWebElement element in elements)
             {
-                centers.Add(new ContactData(element.Text));
+                centers.Add(new ContactData(element.Text, element.Text));
             }
             return centers;
         }

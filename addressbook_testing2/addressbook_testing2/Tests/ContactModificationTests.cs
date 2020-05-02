@@ -14,9 +14,8 @@ namespace addressbook_testing2
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newName = new ContactData("wwww");
+            ContactData newName = new ContactData("wwww", "xxxx");
             newName.Middle_name = "xxxx";
-            newName.Last_name = "zzzz";
             newName.Nick_name = "vvvv";
 
             app.Contacts.ContactExists();

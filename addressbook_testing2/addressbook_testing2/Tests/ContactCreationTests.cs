@@ -13,7 +13,7 @@ namespace addressbook_testing2
         [Test]
         public void NewContactTest()
         {
-            ContactData cname = new ContactData("asdafs");
+            ContactData cname = new ContactData("asdafs", "asgxfdg");
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 

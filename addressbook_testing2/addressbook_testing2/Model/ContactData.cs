@@ -28,10 +28,11 @@ namespace addressbook_testing2
             private string contact_notes = "";
  
 
-            public ContactData(string first_name)
-            {
+        public ContactData(string first_name, string last_name)
+        {
             this.first_name = first_name;
-            } 
+            this.last_name = last_name;
+        } 
 
         public bool Equals(ContactData other)
         {
@@ -43,27 +44,30 @@ namespace addressbook_testing2
             {
                 return true;
             }
-
-            return First_name == other.First_name;
+            return First_name == other.First_name & Last_name == other.Last_name;
         }
 
         public override int GetHashCode()
         {
-            return First_name.GetHashCode();
+            return First_name.GetHashCode() & Last_name.GetHashCode();
         }
 
         public override string ToString()
         {
-            return First_name;
+            return First_name + " " + Last_name;
         }
 
         public int CompareTo(ContactData other)
         {
-            if (Object.ReferenceEquals(other, null))
+            if (Object.ReferenceEquals(Last_name, null))
             {
-                return 1;
+                if (Last_name == other.Last_name)
+                {
+                    Object.ReferenceEquals(First_name, null);
+                    return 1;
+                }
             }
-            return First_name.CompareTo(other.First_name);
+                return Last_name.CompareTo(other.Last_name);           
         }
 
             public string First_name
