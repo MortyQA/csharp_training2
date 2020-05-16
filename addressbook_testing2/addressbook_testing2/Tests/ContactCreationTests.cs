@@ -14,10 +14,14 @@ namespace addressbook_testing2
         public void NewContactTest()
         {
             ContactData cname = new ContactData("asdafs", "asgxfdg");
+            cname.Middle_name = "xcv";
+            cname.Nick_name = "xcv";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.AddNewContactName(cname);
+
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts.Add(cname);

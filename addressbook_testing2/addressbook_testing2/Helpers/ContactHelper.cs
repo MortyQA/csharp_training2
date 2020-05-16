@@ -236,20 +236,32 @@ namespace addressbook_testing2
             return this;
         }
 
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> centers = new List<ContactData>();
-            manager.Navigator.GoToHome();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
-
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                string firstname = cells[2].Text;
-                string lastname = cells[1].Text;
-                centers.Add(new ContactData(firstname, lastname));
+                contactCache = new List<ContactData>();
+                manager.Navigator.GoToHome();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
+                foreach (IWebElement element in elements)
+                {
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    string firstname = cells[2].Text;
+                    string lastname = cells[1].Text;
+                    contactCache.Add(new ContactData(firstname, lastname) {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
-            return centers;
+            return contactCache;
         }
+
+        public int  GetContactCount()
+        {
+            manager.Navigator.GoToHome();
+            return driver.FindElements(By.XPath("(//tr[@name='entry'])")).Count;
+        }     
     }
 }
