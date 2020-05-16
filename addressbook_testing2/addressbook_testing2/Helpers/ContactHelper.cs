@@ -199,9 +199,9 @@ namespace addressbook_testing2
             return this;
         }
 
-        public ContactHelper SelectContact(int ID)
+        public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + ID + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -240,10 +240,14 @@ namespace addressbook_testing2
         {
             List<ContactData> centers = new List<ContactData>();
             manager.Navigator.GoToHome();
-            ICollection<IWebElement> elements = driver.FindElements(By.TagName("td"));
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("(//tr[@name='entry'])"));
+
             foreach (IWebElement element in elements)
             {
-                centers.Add(new ContactData(element.Text, element.Text));
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                string firstname = cells[2].Text;
+                string lastname = cells[1].Text;
+                centers.Add(new ContactData(firstname, lastname));
             }
             return centers;
         }
