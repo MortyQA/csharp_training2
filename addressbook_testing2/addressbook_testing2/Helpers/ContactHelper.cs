@@ -184,12 +184,14 @@ namespace addressbook_testing2
         public ContactHelper AddContact()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -208,7 +210,7 @@ namespace addressbook_testing2
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
-
+            contactCache = null;
             return this;
         }
 

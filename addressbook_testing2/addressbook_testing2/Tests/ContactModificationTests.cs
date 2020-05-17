@@ -19,9 +19,12 @@ namespace addressbook_testing2
             newName.Nick_name = "xcv";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData oldData = oldContacts[0];
 
             app.Contacts.ContactExists();
             app.Contacts.Modify(newName);
+
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].First_name = newName.First_name;
@@ -30,7 +33,14 @@ namespace addressbook_testing2
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
 
+            foreach (ContactData contacts in newContacts)
+            {
+                if (contacts.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newName.First_name, contacts.First_name);
+                    Assert.AreEqual(newName.Last_name, contacts.Last_name);
+                }
+            }
         }
-
     }
 }
