@@ -29,7 +29,7 @@ namespace addressbook_testing2
             }
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
         public void LogOut()
@@ -48,8 +48,13 @@ namespace addressbook_testing2
         public bool IsLoggedIn(AccountData account)
         {
             return IsLoggedIn()
-              && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
-                == "(" + account.Username + ")";
+                && GetLoggetUserName() == account.Username;
+        }
+
+        public string GetLoggetUserName()
+        {
+            string text = driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text;
+            return text.Substring(1, text.Length - 2);
         }
     }
 }

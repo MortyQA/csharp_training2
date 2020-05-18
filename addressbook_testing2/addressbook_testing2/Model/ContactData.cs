@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace addressbook_testing2
 {
      public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+        private string allPhones;
+        private string allEmails;
+
         public ContactData(string first_name, string last_name)
         {
             First_name = first_name;
@@ -68,7 +72,54 @@ namespace addressbook_testing2
             public string Contact_email3 { get; set; }
             public string Contact_address2 { get; set; }
             public string Contact_phone2 { get; set; }
-            public string Contact_notes { get; set; }
+            public string Contact_notes { get; set; }           
 
-     }
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return Contact_email + Contact_email2 + Contact_email3.Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
+
+        public string AllPhones
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return CleanUp(Homephone) + CleanUp(Mobilephone) + CleanUp(Workphone).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+           return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+        }    
+            
+    }
 }
