@@ -254,9 +254,8 @@ namespace addressbook_testing2
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
                     string firstname = cells[2].Text;
                     string lastname = cells[1].Text;
-                    contactCache.Add(new ContactData(firstname, lastname) {
-                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                    });
+                    int id = int.Parse(element.FindElement(By.TagName("input")).GetAttribute("value"));
+                    contactCache.Add(new ContactData(firstname, lastname, id, null, null, null, null, null, null));
                 }
             }
             return contactCache;
@@ -277,25 +276,21 @@ namespace addressbook_testing2
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
-            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string homephone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilephone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workphone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string faxphone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
-            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string contact_email = driver.FindElement(By.Name("email")).GetAttribute("value");
 
-            return new ContactData(firstName, lastName)
+            return new ContactData(firstName, lastName, 0, address, homephone, mobilephone, workphone, faxphone, contact_email)
             {
                 Address = address,
-                Homephone = homePhone,
-                Mobilephone = mobilePhone,
-                Workphone = workPhone,
-                Contact_email = email,
-                Contact_email2 = email2,
-                Contact_email3 = email3
+                Homephone = homephone,
+                Mobilephone = mobilephone,
+                Workphone = workphone,
+                Contact_email = contact_email,
             };
-
         }
 
         internal ContactData GetContactInformationFromTable(int index)
@@ -307,7 +302,7 @@ namespace addressbook_testing2
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
 
-            return new ContactData(firstName, lastName)
+            return new ContactData(firstName, lastName, 0, address, null, null, null, null, null)
             {
                 Address = address,
                 AllPhones = allPhones,
@@ -319,7 +314,7 @@ namespace addressbook_testing2
         {
             manager.Navigator.GoToHome();
             string text = driver.FindElement(By.TagName("label")).Text;
-            Match m =  new Regex(@"\d+").Match(text);
+            Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
         }
     }

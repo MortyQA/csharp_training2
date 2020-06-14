@@ -11,12 +11,19 @@ namespace addressbook_testing2
     {
         private string allPhones;
         private string allEmails;
+        private int id;
 
-        public ContactData(string first_name, string last_name)
+        public ContactData(string first_name, string last_name, int id, string address, string homephone, string mobilephone, string workphone, string faxphone, string contact_email)
         {
             First_name = first_name;
             Last_name = last_name;
-        } 
+            Id = int.MaxValue;
+            Homephone = homephone;
+            Mobilephone = mobilephone;
+            Workphone = workphone;
+            Faxphone = faxphone;
+            Contact_email = contact_email;
+        }
 
         public bool Equals(ContactData other)
         {
@@ -28,17 +35,17 @@ namespace addressbook_testing2
             {
                 return true;
             }
-            return First_name == other.First_name & Last_name == other.Last_name;
+            return id== other.id & First_name == other.First_name & Last_name == other.Last_name;
         }
 
         public override int GetHashCode()
         {
-            return First_name.GetHashCode() & Last_name.GetHashCode();
+            return Id.GetHashCode() & First_name.GetHashCode() & Last_name.GetHashCode();
         }
 
         public override string ToString()
         {
-            return First_name + " " + Last_name;
+            return Id + " " + First_name + " " + Last_name;
         }
 
         public int CompareTo(ContactData other)
@@ -58,7 +65,7 @@ namespace addressbook_testing2
             public string Middle_name { get; set; }
             public string Last_name { get; set; }
             public string Nick_name { get; set; }       
-            public string Id { get; set; }
+            public int Id { get; set; }
             public string Contact_title { get; set; }
             public string Contact_company { get; set; }        
             public string Address { get; set; }        
@@ -119,7 +126,11 @@ namespace addressbook_testing2
                 return "";
             }
            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
-        }    
-            
+        }
+
+        public void setId(int id)
+        {
+            this.id = id;
+        }
     }
 }

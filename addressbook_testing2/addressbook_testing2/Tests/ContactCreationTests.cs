@@ -13,7 +13,7 @@ namespace addressbook_testing2
         [Test]
         public void NewContactTest()
         {
-            ContactData cname = new ContactData("asdafs", "asgxfdg");
+            ContactData cname = new ContactData("asdafs", "asgxfdg",0,null,null,null,null,null,null);
             cname.Middle_name = "xcv";
             cname.Nick_name = "xcv";
 
